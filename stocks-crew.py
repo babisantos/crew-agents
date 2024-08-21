@@ -127,7 +127,7 @@ writeAnalyses = Task(
 crew = Crew(
     agents=[stockPriceAnalyst, newsAnalyst, stockAnalystWriter],
     tasks=[getStockPrice, get_news, writeAnalyses],
-    verbose=2,
+    verbose=True,
     process=Process.hierarchical,
     full_output=True,
     share_crew=False,
@@ -147,7 +147,7 @@ if submit_button:
     if not topic:
         st.error("Por favor, informe a ação.")
     else:
-        results = crew.kickoff(inputs={"ticket": topic})
+        results = crew.kickoff(inputs={"ticket": topic.upper()})
 
         st.subheader("Resultado da pesquisa:")
         st.write(results["final_output"])
